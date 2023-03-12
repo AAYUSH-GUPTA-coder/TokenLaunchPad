@@ -18,7 +18,7 @@ contract MyToken is ERC20, Ownable {
     }
 
 
-    constructor(address _creator, string memory _name, string memory _symbol, bool _setTotalCap, uint _totalCap, bool _wantInitialMint, uint _initialMint, address[] memory whiteListAddresses) ERC20(_name, _symbol) {
+    constructor(address _creator, string memory _name, string memory _symbol, bool _setTotalCap, uint _totalCap, bool _wantInitialMint, uint _initialMint, address[] memory _whiteListAddresses) ERC20(_name, _symbol) {
         totalCap = _totalCap;
         initialMint = _initialMint;
         if(_setTotalCap == false){
@@ -27,8 +27,8 @@ contract MyToken is ERC20, Ownable {
         if(_wantInitialMint == false ){
             initialMint = 0;
         }
-        for(uint i=0; i < whiteListAddresses.length; i++){
-            whiteList[whiteListAddresses[i]] = true;
+        for(uint i=0; i < _whiteListAddresses.length; i++){
+            whiteList[_whiteListAddresses[i]] = true;
         }
         creator = _creator;
         _mint(_creator, _initialMint);
@@ -47,6 +47,6 @@ contract MyToken is ERC20, Ownable {
     }
 
     function getCreator() public view returns(address){
-        return creator
+        return creator;
     }
 }
