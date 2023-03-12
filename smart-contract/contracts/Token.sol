@@ -4,7 +4,7 @@ pragma solidity ^0.8.9;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract MyToken is ERC20, Ownable {
+contract Token is ERC20, Ownable {
     uint internal totalCap;
     uint internal initialMint;
     address internal creator;
@@ -13,7 +13,7 @@ contract MyToken is ERC20, Ownable {
     mapping (address => bool) internal whiteList;
 
     modifier onlyAllowList(){
-        require(msg.sender == whitelist || msg.sender == creator,"not allowed");
+        require(whiteList[msg.sender] || msg.sender == creator,"not allowed");
         _;
     }
 
