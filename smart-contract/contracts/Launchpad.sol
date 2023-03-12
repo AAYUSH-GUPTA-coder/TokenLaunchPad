@@ -3,7 +3,7 @@ pragma solidity ^0.8.9;
 
 import "./Token.sol";
 
-contract LaunchPad{
+contract LaunchPad {
 
     // LaunchPad contract onwer
     address private immutable launchPadOwner;
@@ -41,7 +41,7 @@ contract LaunchPad{
     /**
      * @dev function to create the contract MultiSigWallet
      */
-    function CreateToken(address _creator, string _name, string _symbol, bool _setTotalCap, uint _totalCap, bool _wantInitialMint, uint _initialMint, address[] _whiteListAddresses) public {
+    function CreateToken(address _creator, string memory _name, string memory _symbol, bool _setTotalCap, uint _totalCap, bool _wantInitialMint, uint _initialMint, address[] memory _whiteListAddresses) public {
         // Create a new Wallet contract
         Token token =  new Token(
             _creator,
@@ -56,11 +56,11 @@ contract LaunchPad{
         // Increment the number of Tokens Created
         numOfTokensCreated++;
 
-        // Add token to the mapping
+        // Add token data to the mapping
         allData[_creator] = (
             LaunchStruct(
-                address(this),
-                _creator,
+            address(this),
+            _creator,
             _name,
             _symbol,
             _setTotalCap,
