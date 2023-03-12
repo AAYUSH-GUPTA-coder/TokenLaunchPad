@@ -6,7 +6,7 @@ import "./Token.sol";
 contract LaunchPad{
 
     // LaunchPad contract onwer
-    address private immutable launchPadOwnerOwner;
+    address private immutable launchPadOwner;
 
     // number of Tokens Created
     uint256 public numOfTokensCreated;
@@ -28,13 +28,14 @@ contract LaunchPad{
     mapping(address => LaunchStruct) public allData;
 
     // creator address to check the addresses of token created
+    // creator => token addresses
     mapping(address => address[]) public tokenAddresses;
 
     /**
      * @dev constructor to get the owner address of this contract factory
      */
     constructor(address _launchPadOwner) {
-        launchPadOwnerOwner = _launchPadOwner;
+        launchPadOwner = _launchPadOwner;
     }
 
     /**
@@ -74,5 +75,21 @@ contract LaunchPad{
         // Solidity mappings with array type keys are not a good idea to use in practice, 
         // as the key data is stored in the contract storage and it will consume a lot of storage and gas cost.
         tokenAddresses[_creator].push(address(token));
+    }
+
+
+    // get the address of Launchpad contract
+    function getAddressOfLaunchpadContract() public view returns (address) {
+        return address(this);
+    }
+
+    // get the address of Launchpad contract owner
+    function getAddressOfLaunchpadOwner() public view returns (address) {
+        return launchPadOwner;
+    }
+
+    // get all the wallet addresses deployed by creator address
+    function getTokensCreatedByCreator(address _creatorAddress) public view returns(address[] memory){
+        return tokenAddresses[_creatorAddress];
     }
 }
